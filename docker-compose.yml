@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: word-runner-db-container
+    image: postgres:latest
+    restart: always  # Always restart the container if it crashes
+    environment:
+      POSTGRES_USER: ${DB_USER}  # Using the DB_USER variable from .env
+      POSTGRES_PASSWORD: ${DB_PASS}  # Using the DB_PASS variable from .env
+      POSTGRES_DB: ${DB_NAME}  # Using the DB_NAME variable from .env
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent storage for DB data
+
+volumes:
+  postgres_data:  # Named volume to store PostgreSQL data
